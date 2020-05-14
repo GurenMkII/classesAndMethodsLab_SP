@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Bookstore
  */
@@ -12,6 +14,8 @@ public class Bookstore {
     public boolean isItOpenSundays;
     public String dailyOpeningTime;
     public String dailyClosingTime;
+
+    private ArrayList<String> titles;
 
 
     public Bookstore(){
