@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -28,8 +29,8 @@ public class Bookstore {
         this.isItOpenSundays = false;
         this.dailyOpeningTime = "9am";
         this.dailyClosingTime = "5pm";
-
-        
+        titles = new ArrayList<String>();
+        loadTitles();
     }
     
     public Bookstore(boolean d, boolean f, boolean g){
@@ -42,6 +43,8 @@ public class Bookstore {
         this.isItOpenSundays = g;        
         this.dailyOpeningTime = "9am";
         this.dailyClosingTime = "5pm";
+        titles = new ArrayList<String>();
+        loadTitles();
     }
     
     public Bookstore(String a, String b, int c, boolean d, boolean e, boolean f, boolean g, String h, String i){
@@ -53,8 +56,26 @@ public class Bookstore {
         this.isItOpenWeekends = f;
         this.isItOpenSundays = g;        
         this.dailyOpeningTime = "9am";
-        this.dailyClosingTime = "5pm";        
+        this.dailyClosingTime = "5pm";
+        titles = new ArrayList<String>();
+        loadTitles();
     }
+
+    private void loadTitles()
+{
+  try
+  {
+    Utils.loadStringsToArray(this.titles);
+  }
+  catch (IOException e)
+  {
+    // for now simply init the array to zero
+    System.out.println("Could not initialize the titles");
+    // make sure it is empty
+    this.titles = new ArrayList<String>();
+    
+  }
+}
 
     public void setName(String name){  
         this.name = name;      
@@ -147,17 +168,45 @@ public class Bookstore {
 
 
     public void storeIntro(Bookstore s){
+        System.out.println();
         System.out.println("Welcome to "+ s.getName()+",");
         System.out.println("Located at "+ s.getAddress()+".");
         System.out.println("Our store stretches across "+ s.getSqFt()+" of open sales floor.");
         if (usedBooks){
             System.out.println("We have a wide selection of new and used books!");
         } else System.out.println("We have a wide selection of brand new books!");
+        System.out.println("Current stock is "+titles.size()+" books.");
         if (isItOpen){
             System.out.println("The store is open now.");
         } else System.out.println("The store is closed at this time.");
         System.out.println("Store working hours are: "+getDailyOpenTimes()+" - "+getDailyClosingTimes()+".");
+        System.out.println();
 
+    }
+
+    public void printTitles(){
+        System.out.println();
+        System.out.println("Books available:");
+        for (String s: titles){
+            System.out.println("  -- "+s);
+        }
+        System.out.println();
+    }
+    
+    public void checkTitle(String y){
+        System.out.println();
+        String x = y.toLowerCase();
+        boolean blah = false;
+        for (String s: titles){
+            String z = s.toLowerCase();
+            if(z.equals(x)){
+                blah = true;
+            }
+        }
+        if (blah){
+            System.out.println("Yes, we have the book with the title '"+y+"'!");
+        } else System.out.println("Sorry, we don't have the book with the title '"+y+"'...");
+        System.out.println();
     }
 
     

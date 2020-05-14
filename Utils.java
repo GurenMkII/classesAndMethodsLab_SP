@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 public class Utils {
 
     public static void loadStringsToArray(ArrayList<String> arrList) throws IOException{
-        Path path = Paths.get("BookTitles.txt");
+        Path path = Paths.get("C:\\OneDrive\\WIN2020\\TiTUS\\week10\\5_14_20\\srs\\Bookfile.txt");
         arrList.clear();
 
         // The stream file will also be closed here
@@ -22,3 +22,4 @@ public class Utils {
     }
     
 }
+
